@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Screenshot taking utility
+# Requires :    1. imlib2_grab(from imlib2 but this binary isn't not available on all systems)
+
+date=$(date '+%d-%m-%y_%H-%M-%S')
+imlib2_grab ~/Pictures/Screenshots/$date.png
+[[ -f ~/Pictures/Screenshots/$date.png ]] && notify-send "📷 Screenshot Captured" && exit 0
+notify-send "⚠️ Something went wrong!" && exit 1
