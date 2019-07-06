@@ -71,7 +71,7 @@ function umnt_mtp {
         notify-send "Device Unmounted" && rm -r "$device"
 }
 
-choice=$(echo -e "Mount_Drive\nUnmount_Drive\nMount_MTP_Device\nUnmount_MTP_Device" | dmenu -l 4)
+choice=$(echo -e "Mount_Drive\nUnmount_Drive\nMount_MTP_Device\nUnmount_MTP_Device" | dmenu -p mount -l 4)
 [[ -z $choice ]] && notify-send ":( No option selected!" && exit 1
 if [[ $choice == "Mount_Drive" ]]; then
     analyze_drives
