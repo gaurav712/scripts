@@ -1,6 +1,12 @@
 #!/bin/sh
 
-# To switch wlan states
+# To switch wlan state
 
-[[ $(rfkill | awk '/^\ 0/ {print $4}') == "unblocked" ]] && sudo rfkill block wlan || sudo rfkill unblock wlan
+if [[ $(rfkill | grep -m 1 wlan | awk '{print $4}') == "unblocked" ]]; then
+    sudo rfkill block wlan &&
+        sudo killall wpa_supplicant
+else
+    sudo rfkill unblock wlan &&
+        sudo wpa_supplicant -D nl80211 -i wlp3s0 -c /etc/wpa_supplicant/wpa_supplicant.conf -B
+fi
 exit 0
