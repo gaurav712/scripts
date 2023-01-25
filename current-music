@@ -1,0 +1,20 @@
+#!/bin/bash
+
+status=$(playerctl status)
+
+if [[ $status == "" ]]; then
+  printf "⏹️ Not Playing"
+  exit 0
+fi
+
+max_length=15
+title=$(playerctl metadata | grep title | awk '{ for (i=3; i<=NF; i++) printf("%s ", $i)}')
+
+if [[ $status == Playing ]]; then
+  icon="▶️"
+else
+  icon="⏸️"
+fi
+trimmed_title=${title:0:$max_length}
+
+printf "$icon $trimmed_title.."
