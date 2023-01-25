@@ -1,0 +1,8 @@
+#!/bin/bash
+
+metadata=$(playerctl metadata)
+title=$(echo "$metadata" | grep title | awk '{ for (i=3; i<=NF; i++) printf("%s ", $i)}')
+artist=$(echo "$metadata" | grep artist | awk '{ for (i=3; i<=NF; i++) printf("%s ", $i)}')
+albumArt=$(echo "$metadata" | grep artUrl | awk '{print $3}')
+
+notify-send -i "$albumArt" "$title" "$artist"
