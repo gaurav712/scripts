@@ -1,0 +1,8 @@
+#!/bin/sh
+
+do=true
+while $do ||  [ -f /tmp/restart_dwl ]; do
+    do=false
+    rm -rf /tmp/restart_dwl > /dev/null 2>&1
+    dwl -s somebar
+done
